@@ -12,14 +12,13 @@ public class PlayerController : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        CurrentStage = GameObject.Find("Stage1_1");
         StageSpawn = GameObject.FindObjectOfType<TerrainGenerator>();
     }
 	
 	// Update is called once per frame
 	void Update () {
         InputCheck();
-        if (transform.position.x >= CurrentStage.transform.Find("Ground").position.x)
+        if (transform.position.x >= CurrentStage.transform.position.x)
         {
             //Generate new terrain
             StageSpawn.GenerateNewTerrain();
@@ -34,6 +33,7 @@ public class PlayerController : MonoBehaviour {
     }
     void OnCollisionEnter2D(Collision2D col)
     {
+        CurrentStage = col.gameObject;
         if (!isGrounded && col.collider.tag == "Ground")
         {
                 isGrounded = true;

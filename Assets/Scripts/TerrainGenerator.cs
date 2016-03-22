@@ -11,18 +11,21 @@ public class TerrainGenerator : MonoBehaviour {
     private int CurrentStageIndex;
     private int StartStageIndex;
     private int EndStageIndex;
+    private GameObject CurrentStage;
+    private int CurrentLevel;
 
     void Start()
     {
         //find current stage and determine how much levels exists for this stage
-        //FindNumberOfLevels();
+        FindNumberOfLevels();
+
         PlayerScript = GameObject.Find("Player").GetComponent<PlayerController>();
     }
     public void GenerateNewTerrain()
     {
         OldStage = GameObject.Find("Ground");
         NewStageIndex = UnityEngine.Random.Range(StartStageIndex, EndStageIndex);
-        NewStage = (GameObject)Instantiate(Resources.Load("Stage" + "1" + "_" +  NewStageIndex));
+        NewStage = (GameObject)Instantiate(Resources.Load("Stage" + CurrentLevel + "_" +  NewStageIndex));
         CurrentStageName = "Stage" + "1" + "_" + NewStageIndex;
 
         CurrentStageWidth = PlayerScript.CurrentStage.transform.Find("Ground").gameObject.GetComponent<Collider2D>().bounds.size.x;
@@ -33,11 +36,14 @@ public class TerrainGenerator : MonoBehaviour {
     void FindNumberOfLevels()
     {
         //determine the current stage - placeholder for now
-        CurrentStageName = "Stage1_1";
+
+        CurrentStage = GameObject.FindWithTag("Stage");
+        CurrentStageName = CurrentStage.ToString().Substring(0, 8);
+        CurrentLevel = Convert.ToInt32(CurrentStage.ToString().Substring(5, 1));
         //search for how much files or prefabs exist for this level - eg there is 2 pre fabs for stage 1_x right now
 
         //set start, current and end indexes based on prefabs found
-       
+
         StartStageIndex = 1;
         EndStageIndex = 3;
 }
