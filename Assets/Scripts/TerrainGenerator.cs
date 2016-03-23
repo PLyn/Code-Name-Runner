@@ -28,7 +28,7 @@ public class TerrainGenerator : MonoBehaviour {
         NewStage = (GameObject)Instantiate(Resources.Load("Stage" + CurrentLevel + "_" +  NewStageIndex));
         CurrentStageName = "Stage" + "1" + "_" + NewStageIndex;
 
-        CurrentStageWidth = PlayerScript.CurrentStage.transform.Find("Ground").gameObject.GetComponent<Collider2D>().bounds.size.x;
+        CurrentStageWidth = PlayerScript.CurrentStage.gameObject.GetComponent<BoxCollider2D>().bounds.size.x;
         NewStage.transform.position = new Vector3(CurrentStageWidth - StageController.CurrentSpeed, 
                                                     PlayerScript.CurrentStage.transform.position.y, 
                                                     PlayerScript.CurrentStage.transform.position.z);

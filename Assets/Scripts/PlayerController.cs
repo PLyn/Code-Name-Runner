@@ -9,9 +9,11 @@ public class PlayerController : MonoBehaviour {
     public bool isGrounded = true;
     public GameObject CurrentStage;
     private TerrainGenerator StageSpawn;
+    private Transform t;
 
     // Use this for initialization
     void Start () {
+        CurrentStage = GameObject.FindWithTag("Ground");
         StageSpawn = GameObject.FindObjectOfType<TerrainGenerator>();
     }
 	
@@ -22,7 +24,14 @@ public class PlayerController : MonoBehaviour {
         {
             //Generate new terrain
             StageSpawn.GenerateNewTerrain();
-            CurrentStage = StageSpawn.NewStage;
+            t = StageSpawn.NewStage.transform;
+            foreach (Transform tr in t)
+            {
+                if (tr.tag == "Ground")
+                {
+                    CurrentStage = tr.gameObject;
+                }
+            }
         }
         //add timer to increment or decrement jump time and force as the game gets faster?
     }
@@ -33,7 +42,7 @@ public class PlayerController : MonoBehaviour {
     }
     void OnCollisionEnter2D(Collision2D col)
     {
-        CurrentStage = col.gameObject;
+        
         if (!isGrounded && col.collider.tag == "Ground")
         {
                 isGrounded = true;
