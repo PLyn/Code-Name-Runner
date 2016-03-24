@@ -13,6 +13,7 @@ public class TerrainGenerator : MonoBehaviour {
     private int EndStageIndex;
     private GameObject CurrentStage;
     private int CurrentLevel;
+    private UnityEngine.Object[] AllLevels = new UnityEngine.Object[10];
 
     void Start()
     {
@@ -40,10 +41,11 @@ public class TerrainGenerator : MonoBehaviour {
         CurrentStage = GameObject.FindWithTag("Stage");
         CurrentStageName = CurrentStage.ToString().Substring(0, 8);
         CurrentLevel = Convert.ToInt32(CurrentStage.ToString().Substring(5, 1));
+
         //search for how much files or prefabs exist for this level - eg there is 2 pre fabs for stage 1_x right now
-
+        AllLevels = Resources.LoadAll("");
         //set start, current and end indexes based on prefabs found
-
+        
         StartStageIndex = 1;
         EndStageIndex = 3;
 }
