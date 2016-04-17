@@ -6,9 +6,9 @@ public class StageController : MonoBehaviour {
     private Vector3 StartPos;
     private Vector3 EndPos;
     public float MaxSpeed = 7.5f;
-    public float Acceleration = 0.1f;
+    public static float Acceleration = 0.5f;
     public static float CurrentSpeed = 3f;
-    private float SpeedUpdateIncrement = 5f;
+    private float SpeedUpdateIncrement = 0.5f;
     private float TimeToNextSpeedUpdate = 0f;
     // Use this for initialization
     void Start () {
